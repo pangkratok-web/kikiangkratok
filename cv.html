@@ -134,11 +134,13 @@ class Component extends DCLogic {
   renderVals() {
     return {
       print: this.print,
-      sections: this.SECTIONS.map(s => ({
+      // Empty sections are dropped entirely — the emptyNote guidance above is
+      // for Kiki, and must never render on the public page.
+      sections: this.SECTIONS.filter(s => s.entries.length > 0).map(s => ({
         heading: s.heading,
         entries: s.entries,
-        isEmpty: s.entries.length === 0,
-        emptyNote: s.emptyNote,
+        isEmpty: false,
+        emptyNote: "",
       })),
     };
   }

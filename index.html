@@ -97,11 +97,17 @@
       <div>
         <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
           <div style="border:1px solid rgba(23,21,15,0.3);padding:32px;text-align:center">
-            <p style="font-family:'Newsreader',serif;font-size:25px;margin-bottom:8px">You're on the list</p>
-            <p style="color:#5e594f;font-size:15px">You'll hear from me when the next piece is ready.</p>
+            <p style="font-family:'Newsreader',serif;font-size:25px;margin-bottom:8px">Check your email</p>
+            <p style="color:#5e594f;font-size:15px;line-height:1.6">Click the link in the confirmation note to finish joining. Then you'll hear from me when the next piece is ready.</p>
           </div>
         </sc-if>
-        <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+        <sc-if value="{{ listPending }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid rgba(23,21,15,0.3);padding:32px">
+            <p style="font-family:'Newsreader',serif;font-size:25px;margin-bottom:10px">The list opens soon</p>
+            <p style="color:#5e594f;font-size:15px;line-height:1.6">Until then, email <a href="mailto:hello@kikiangkratok.art?subject=Add%20me%20to%20the%20list" style="text-decoration:none;border-bottom:1px solid rgba(23,21,15,0.35)">hello@kikiangkratok.art</a> and I'll add you by hand.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
           <form onSubmit="{{ subscribe }}" style="display:flex;flex-direction:column;gap:12px">
             <input name="email" type="email" required placeholder="you@example.com" style="border:1px solid rgba(23,21,15,0.3);background:#f4f1ec;padding:16px;font-size:16px;font-family:'Hanken Grotesk',sans-serif;color:#17150f" />
             <input type="text" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
@@ -126,7 +132,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:1000},&quot;shopName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kiki Angkratok&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;artistName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kiki Angkratok&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;newsletterEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Mailing list&quot;},&quot;listTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;new-work&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Mailing list&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:1000},&quot;shopName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kiki Angkratok&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;artistName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kiki Angkratok&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;buttondownUsername&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;kikiangkratok&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Mailing list&quot;},&quot;listTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;new-work&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Mailing list&quot;}}">
 class Component extends DCLogic {
   state = { subscribed: false, sending: false, error: "" };
 
@@ -148,18 +154,15 @@ class Component extends DCLogic {
     const email = form.email.value.trim();
     if (!email) return;
 
-    const endpoint = (this.props.newsletterEndpoint ?? "").trim();
-    if (!endpoint) {
-      // No provider connected yet — confirm locally so the flow is testable.
-      this.setState({ subscribed: true, error: "" });
-      return;
-    }
+    const user = (this.props.buttondownUsername ?? "kikiangkratok").trim();
+    if (!user) return; // form is hidden until a username is set
 
     this.setState({ sending: true, error: "" });
     try {
       const body = new FormData();
       body.append("email", email);
       body.append("tag", this.props.listTag ?? "new-work");
+      const endpoint = "https://buttondown.email/api/emails/embed-subscribe/" + encodeURIComponent(user);
       await fetch(endpoint, { method: "POST", body, mode: "no-cors" });
       this.setState({ subscribed: true, sending: false });
     } catch (err) {
@@ -184,7 +187,8 @@ class Component extends DCLogic {
       })),
       subscribe: this.subscribe,
       subscribed: this.state.subscribed,
-      notSubscribed: !this.state.subscribed,
+      showForm: !this.state.subscribed && !!(this.props.buttondownUsername ?? "kikiangkratok").trim(),
+      listPending: !(this.props.buttondownUsername ?? "kikiangkratok").trim(),
       sending: this.state.sending,
       submitLabel: this.state.sending ? "Joining…" : "Join the list",
       submitStyle: `background:#17150f;color:#f4f1ec;border:none;padding:16px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:${this.state.sending ? "wait" : "pointer"};opacity:${this.state.sending ? 0.6 : 1}`,
