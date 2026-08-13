@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -29,15 +29,10 @@
       <a href="#top" style="font-family:'Newsreader',serif;font-size:22px;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;flex-shrink:0">{{ shopName }}</a>
       <nav style="display:flex;align-items:center;gap:22px;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;flex-wrap:wrap;justify-content:flex-end">
         <a href="#shop" style="text-decoration:none;white-space:nowrap">Work</a>
-        <a href="#statement" style="text-decoration:none">Statement</a>
         <a href="artist.html" style="text-decoration:none;white-space:nowrap">The Artist</a>
+        <a href="cv.html" style="text-decoration:none">CV</a>
         <a href="commissions.html" style="text-decoration:none;white-space:nowrap">Commissions</a>
         <a href="whats-next.html" style="text-decoration:none;white-space:nowrap">What's Next</a>
-        <a href="#contact" style="text-decoration:none">Contact</a>
-        <button onClick="{{ toggleCart }}" style="border:1px solid rgba(23,21,15,0.3);background:transparent;border-radius:999px;padding:7px 14px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#17150f;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="border-color:#17150f;background:#17150f;color:#f4f1ec">
-          Cart
-          <span style="background:#17150f;color:#f4f1ec;min-width:19px;height:19px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;padding:0 5px">{{ cartCount }}</span>
-        </button>
       </nav>
     </div>
   </header>
@@ -57,17 +52,19 @@
   <section id="shop" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(23,21,15,0.12);border-bottom:1px solid rgba(23,21,15,0.12)">
     <sc-for list="{{ products }}" as="item" hint-placeholder-count="6">
       <article style="background:#f4f1ec;display:flex;flex-direction:column">
-        <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#e7e3da">
+        <a href="{{ item.workHref }}" style="display:block;position:relative;aspect-ratio:4/5;overflow:hidden;background:#e7e3da">
           <div style="{{ item.imgStyle }}"></div>
-        </div>
+        </a>
         <div style="padding:18px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px">
-            <h2 style="font-family:'Newsreader',serif;font-size:21px;font-style:italic;font-weight:400">{{ item.name }}</h2>
-            <span style="font-size:14px;letter-spacing:0.04em;white-space:nowrap">{{ item.priceLabel }}</span>
+            <h2 style="font-family:'Newsreader',serif;font-size:21px;font-style:italic;font-weight:400"><a href="{{ item.workHref }}" style="text-decoration:none">{{ item.name }}</a></h2>
+            <span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#8a8377;white-space:nowrap">{{ item.statusLabel }}</span>
           </div>
           <p style="font-size:13px;line-height:1.6;color:#6b665c;flex:1">{{ item.desc }}</p>
+          <p style="font-size:12px;letter-spacing:0.05em;color:#8a8377">{{ item.spec }}</p>
+          <a href="{{ item.workHref }}" style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(23,21,15,0.3);padding-bottom:4px;align-self:flex-start">View this piece →</a>
           <sc-if value="{{ item.available }}" hint-placeholder-val="{{ true }}">
-            <button data-id="{{ item.id }}" onClick="{{ addToCart }}" style="margin-top:4px;width:100%;border:1px solid rgba(23,21,15,0.3);background:transparent;color:#17150f;border-radius:999px;padding:12px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:all 0.15s" style-hover="background:#17150f;color:#f4f1ec;border-color:#17150f">Add to cart</button>
+            <a href="{{ item.inquireHref }}" style="margin-top:4px;display:block;width:100%;box-sizing:border-box;border:1px solid rgba(23,21,15,0.3);background:transparent;color:#17150f;border-radius:999px;padding:12px;text-align:center;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;transition:all 0.15s" style-hover="background:#17150f;color:#f4f1ec;border-color:#17150f">Inquire</a>
           </sc-if>
           <sc-if value="{{ item.sold }}" hint-placeholder-val="{{ false }}">
             <div style="margin-top:4px;width:100%;border:1px dashed rgba(23,21,15,0.3);color:#8a8377;border-radius:999px;padding:12px;text-align:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase">Sold</div>
@@ -127,84 +124,23 @@
     </div>
   </footer>
 
-  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed;inset:0;z-index:60">
-      <div onClick="{{ toggleCart }}" style="position:absolute;inset:0;background:rgba(23,21,15,0.45);backdrop-filter:blur(2px)"></div>
-      <aside style="position:absolute;top:0;right:0;height:100%;width:min(420px,92vw);background:#f4f1ec;box-shadow:-20px 0 60px -20px rgba(23,21,15,0.5);display:flex;flex-direction:column;animation:gw-slide 0.3s ease both">
-        <div style="padding:24px 26px;border-bottom:1px solid rgba(23,21,15,0.14);display:flex;justify-content:space-between;align-items:center">
-          <h3 style="font-family:'Newsreader',serif;font-size:24px;font-weight:400">Your cart</h3>
-          <button onClick="{{ toggleCart }}" style="background:transparent;border:none;font-size:22px;cursor:pointer;color:#17150f;line-height:1">✕</button>
-        </div>
-        <div style="flex:1;overflow-y:auto;padding:8px 26px">
-          <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
-            <div style="padding:60px 0;text-align:center;color:#8a8377">
-              <p style="font-family:'Newsreader',serif;font-size:22px;color:#5e594f;margin-bottom:8px">Nothing here yet</p>
-              <p style="font-size:14px">Add a piece you love.</p>
-            </div>
-          </sc-if>
-          <sc-for list="{{ cartItems }}" as="line" hint-placeholder-count="0">
-            <div style="display:flex;gap:14px;padding:18px 0;border-bottom:1px solid rgba(23,21,15,0.12)">
-              <div style="width:64px;height:64px;flex-shrink:0;{{ line.thumbStyle }}"></div>
-              <div style="flex:1">
-                <div style="display:flex;justify-content:space-between;gap:8px">
-                  <p style="font-family:'Newsreader',serif;font-size:18px;font-style:italic">{{ line.name }}</p>
-                  <span style="font-size:13px">{{ line.lineLabel }}</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
-                  <button data-id="{{ line.id }}" onClick="{{ decItem }}" style="width:26px;height:26px;border:1px solid rgba(23,21,15,0.3);background:transparent;cursor:pointer;font-size:15px;color:#17150f">–</button>
-                  <span style="font-size:13px;min-width:18px;text-align:center">{{ line.qty }}</span>
-                  <button data-id="{{ line.id }}" onClick="{{ addToCart }}" style="width:26px;height:26px;border:1px solid rgba(23,21,15,0.3);background:transparent;cursor:pointer;font-size:15px;color:#17150f">+</button>
-                </div>
-              </div>
-            </div>
-          </sc-for>
-        </div>
-        <div style="padding:22px 26px;border-top:1px solid rgba(23,21,15,0.14)">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
-            <span style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#8a8377">Subtotal</span>
-            <span style="font-family:'Newsreader',serif;font-size:26px">{{ cartTotalLabel }}</span>
-          </div>
-          <button onClick="{{ checkout }}" style="width:100%;background:#17150f;color:#f4f1ec;border:none;border-radius:999px;padding:16px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer">Checkout</button>
-          <p style="font-size:11px;color:#8a8377;text-align:center;margin-top:12px">Shipping &amp; taxes calculated at checkout</p>
-        </div>
-      </aside>
-    </div>
-  </sc-if>
-
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:1000},&quot;shopName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kiki Angkratok&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;artistName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kiki Angkratok&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showPrices&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;newsletterEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Mailing list&quot;},&quot;listTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;new-work&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Mailing list&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:1000},&quot;shopName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kiki Angkratok&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;artistName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kiki Angkratok&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;newsletterEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Mailing list&quot;},&quot;listTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;new-work&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Mailing list&quot;}}">
 class Component extends DCLogic {
-  state = { cart: {}, cartOpen: false, subscribed: false, sending: false, error: "" };
+  state = { subscribed: false, sending: false, error: "" };
 
   PRODUCTS = [
-    { id: "twofaces", name: "Two Faces",         price: 620, sold: false, img: "1TheqTqNtPt1I9HKsqd-HdUQ3f-BuKy8a.jpg", desc: "Mixed media on canvas. Two faces in vivid blue and orange." },
-    { id: "cry",      name: "Cry",               price: 660, sold: false, img: "18uPfNdvOsDPWQKwQWkTkp1mlGoFfU0nv.jpg", desc: "Mixed media on canvas. A head thrown back, sunflowers behind." },
-    { id: "green",    name: "Portrait in Green", price: 640, sold: false, img: "1zfNfFAwUXXSHFfko6RJRqpG7MWWn23cm.jpg", desc: "Mixed media on canvas. A man in a teal shirt, in profile." },
-    { id: "kin",      name: "Kin",               price: 680, sold: false, img: "1ITSWIgzMbpTI2Hdp5y8opTMfioE9lJP-.jpg", desc: "Mixed media on canvas. Three faces on a warm, gold ground." },
-    { id: "woven",    name: "Woven",             price: 600, sold: false, img: "1KgdemlPu6Gua3D7fNJX67iQT6-zCNp3u.jpg", desc: "Mixed media on canvas. A face wrapped in coral pattern." },
-    { id: "joy",      name: "Joy",               price: 690, sold: false, img: "1C97zi_NAjSS_v8b4TkcFc84-3YcSHIts.jpg", desc: "Mixed media on canvas. A laughing portrait in red and pink." },
+    { id: "twofaces", name: "Two Faces",         spec: "Mixed media on canvas · 24 × 30 in · 2026", sold: false, img: "1TheqTqNtPt1I9HKsqd-HdUQ3f-BuKy8a.jpg", desc: "Two faces meeting in vivid blue and orange, pattern worked into the ground." },
+    { id: "cry",      name: "Cry",               spec: "Mixed media on canvas · 30 × 36 in · 2026", sold: false, img: "18uPfNdvOsDPWQKwQWkTkp1mlGoFfU0nv.jpg", desc: "A head thrown back mid-release, sunflowers crowding the space behind." },
+    { id: "green",    name: "Portrait in Green", spec: "Mixed media on canvas · 18 × 24 in · 2026", sold: false, img: "1zfNfFAwUXXSHFfko6RJRqpG7MWWn23cm.jpg", desc: "A quiet profile in teal, built up in layers of paper and paint." },
+    { id: "kin",      name: "Kin",               spec: "Mixed media on canvas · 30 × 40 in · 2026", sold: false, img: "1ITSWIgzMbpTI2Hdp5y8opTMfioE9lJP-.jpg", desc: "Three generations held together on a warm gold ground." },
+    { id: "woven",    name: "Woven",             spec: "Mixed media on canvas · 20 × 24 in · 2025", sold: false, img: "1KgdemlPu6Gua3D7fNJX67iQT6-zCNp3u.jpg", desc: "A face wrapped in coral pattern, fibers pressed into the surface." },
+    { id: "joy",      name: "Joy",               spec: "Mixed media on canvas · 24 × 36 in · 2026", sold: false, img: "1C97zi_NAjSS_v8b4TkcFc84-3YcSHIts.jpg", desc: "Laughter caught wide open, in red and pink." },
   ];
 
   WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 
-  fmt(n) { return "$" + n.toFixed(0); }
-
-  addToCart = (e) => {
-    const id = e.currentTarget.dataset.id;
-    this.setState(s => ({ cart: { ...s.cart, [id]: (s.cart[id] || 0) + 1 }, cartOpen: true }));
-  };
-  decItem = (e) => {
-    const id = e.currentTarget.dataset.id;
-    this.setState(s => {
-      const next = { ...s.cart };
-      next[id] = (next[id] || 0) - 1;
-      if (next[id] <= 0) delete next[id];
-      return { cart: next };
-    });
-  };
-  toggleCart = () => this.setState(s => ({ cartOpen: !s.cartOpen }));
-  checkout = () => { alert("This is a demo storefront — connect Stripe, Shopify, or Etsy here to take real orders."); };
   subscribe = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -232,15 +168,6 @@ class Component extends DCLogic {
   };
 
   renderVals() {
-    const cart = this.state.cart;
-    const byId = Object.fromEntries(this.PRODUCTS.map(p => [p.id, p]));
-    const cartItems = Object.entries(cart).map(([id, qty]) => ({
-      id, qty, name: byId[id].name,
-      lineLabel: this.fmt(byId[id].price * qty),
-      thumbStyle: `background-image:url('${byId[id].img}');background-size:cover;background-position:center;border:1px solid rgba(23,21,15,0.12)`,
-    }));
-    const cartTotal = Object.entries(cart).reduce((a, [id, q]) => a + byId[id].price * q, 0);
-    const showPrices = this.props.showPrices ?? true;
     const count = this.PRODUCTS.filter(p => !p.sold).length;
 
     return {
@@ -249,20 +176,13 @@ class Component extends DCLogic {
       availableLine: (this.WORDS[count] || count) + " originals",
       products: this.PRODUCTS.map(p => ({
         ...p,
-        priceLabel: showPrices ? this.fmt(p.price) : "Inquire",
+        statusLabel: p.sold ? "Collected" : "Available",
+        inquireHref: `mailto:hello@kikiangkratok.art?subject=${encodeURIComponent("Inquiry — " + p.name)}&body=${encodeURIComponent("Hello Kiki,\n\nI'd like to know more about " + p.name + " (" + p.spec + ").\n\n")}`,
         available: !p.sold,
+        workHref: `work.html#${p.id}`,
         imgStyle: `position:absolute;inset:0;background-image:url('${p.img}');background-size:cover;background-position:center`,
       })),
-      addToCart: this.addToCart,
-      decItem: this.decItem,
-      toggleCart: this.toggleCart,
-      checkout: this.checkout,
       subscribe: this.subscribe,
-      cartOpen: this.state.cartOpen,
-      cartItems,
-      cartCount: Object.values(cart).reduce((a, b) => a + b, 0),
-      cartEmpty: cartItems.length === 0,
-      cartTotalLabel: this.fmt(cartTotal),
       subscribed: this.state.subscribed,
       notSubscribed: !this.state.subscribed,
       sending: this.state.sending,
