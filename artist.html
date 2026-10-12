@@ -9,8 +9,8 @@
 <x-dc>
 <helmet>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
@@ -25,72 +25,70 @@
 <div style="background:#f4f1ec;color:#17150f;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;overflow-x:hidden">
 
   <header style="position:sticky;top:0;z-index:40;background:rgba(244,241,236,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(23,21,15,0.12)">
-    <div style="max-width:1400px;margin:0 auto;padding:22px 48px;display:flex;align-items:center;justify-content:space-between;gap:40px">
-      <a href="index.html" style="font-family:'Newsreader',serif;font-size:22px;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;flex-shrink:0">{{ shopName }}</a>
+    <div style="max-width: 1400px; margin: 0 auto; padding: 22px 48px; display: flex; align-items: center; justify-content: space-between; gap: 40px; background-color: #000000">
+      <a href="index.html" style="font-family: 'Newsreader',serif; font-size: 28px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; white-space: nowrap; flex-shrink: 0; color: #FFFFFF">{{ shopName }}</a>
       <nav style="display:flex;align-items:center;gap:22px;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;flex-wrap:wrap;justify-content:flex-end">
-        <a href="index.html#shop" style="text-decoration:none;white-space:nowrap">Work</a>
-        <a href="#top" style="text-decoration:none;white-space:nowrap;border-bottom:1px solid #17150f;padding-bottom:3px">The Artist</a>
-        <a href="cv.html" style="text-decoration:none">CV</a>
-        <a href="commissions.html" style="text-decoration:none;white-space:nowrap">Commissions</a>
-        <a href="whats-next.html" style="text-decoration:none;white-space:nowrap">What's Next</a>
+        <a href="works.html#shop" style="text-decoration: none; white-space: nowrap; color: #E4D8B2">Works</a>
+        <a href="#top" style="text-decoration: none; white-space: nowrap; border-bottom: 1px solid #17150f; padding-bottom: 3px; color: #E4D8B2">The Artist</a>
+        <a href="whats-next.html" style="text-decoration: none; white-space: nowrap; color: #E4D8B2">What's Next</a>
       </nav>
     </div>
   </header>
 
-  <section id="top" style="position:relative;height:72vh;min-height:560px;overflow:hidden">
-    <img src="1MZDvzuuoCssT1J25hJu6vxh7h0eQS_2k.jpg" alt="{{ artistName }} in the studio" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block" />
-    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,6,0.76),rgba(10,9,6,0) 58%)"></div>
+  <section id="top" style="position:relative;height:72vh;min-height:560px;overflow:hidden;background:#000000">
+    <img src="belonging.jpg" alt="Belonging, mixed media painting by Kiki Angkratok" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block">
+    <div style="position: absolute; inset: 0; background: linear-gradient(0deg, #000000, rgba(10,9,6,0) 58%)"></div>
     <div style="position:absolute;left:48px;right:48px;bottom:52px;max-width:1400px;margin:0 auto;color:#f7f4ef;animation:gw-fade 0.9s ease both">
-      <p style="font-size:12px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.82;margin-bottom:16px">Memphis, Tennessee · Painter &amp; social advocate</p>
-      <h1 style="font-family:'Newsreader',serif;font-weight:300;font-size:76px;line-height:0.98;letter-spacing:-0.02em">Twenty years to<br>the first show.</h1>
+      <p style="font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.82; margin-bottom: 16px; color: #E4D8B2">Memphis, Tennessee · Painter &amp; social advocate</p>
+      <h1 style="font-family: 'Newsreader',serif; font-weight: 300; font-size: 60px; line-height: 0.98; letter-spacing: -0.02em">Twenty years to the first show.</h1>
     </div>
   </section>
 
   <section style="display:grid;grid-template-columns:1fr 1.45fr;gap:1px;background:rgba(23,21,15,0.12);border-bottom:1px solid rgba(23,21,15,0.12)">
-    <div style="background:#f4f1ec;padding:72px 48px;display:flex;flex-direction:column;gap:22px">
-      <p style="font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#8a8377">Her story</p>
-      <h2 style="font-family:'Newsreader',serif;font-weight:300;font-size:44px;line-height:1.05;letter-spacing:-0.02em">A little<br>about me</h2>
-      <p style="font-family:'Newsreader',serif;font-size:23px;line-height:1.45;font-style:italic;color:#3d382f;text-wrap:pretty">Kiki Angkratok is a Memphis-based multimedia artist and social advocate currently working in paint and portraiture.</p>
+    <div style="padding: 72px 48px; display: flex; flex-direction: column; gap: 22px; background-color: #000000">
+      <img src="1MZDvzuuoCssT1J25hJu6vxh7h0eQS_2k.jpg" alt="{{ artistName }} in the studio" style="width:100%;max-width:380px;aspect-ratio:4/5;object-fit:cover;object-position:center 30%;display:block;margin-bottom:18px;filter:brightness(0.86) contrast(0.9) saturate(0.92);-webkit-mask-image:radial-gradient(ellipse 85% 85% at 50% 45%, #000 55%, transparent 100%);mask-image:radial-gradient(ellipse 85% 85% at 50% 45%, #000 55%, transparent 100%)">
+      <h2 style="font-family: 'Newsreader',serif; font-weight: 300; font-size: 44px; line-height: 1.05; letter-spacing: -0.02em; color: #E4D8B2">About the Artist</h2>
+      <p style="font-family: 'Newsreader',serif; font-size: 23px; line-height: 1.45; font-style: italic; color: #FFFFFF; text-wrap: pretty">Kiki Angkratok is a Memphis-based multimedia artist and social advocate currently working in paint, fibers, and portraiture.</p>
     </div>
-    <div style="background:#f4f1ec;padding:72px 56px;display:flex;flex-direction:column;gap:22px">
-      <div style="font-size:17px;line-height:1.8;color:#4a463d;display:flex;flex-direction:column;gap:20px;max-width:660px">
-        <p>Utilizing acrylics, oils, and patterned paper, she combines the educational experience of a BA in fine arts from the School of the Art Institute of Chicago, 2008, and a BA/MA in social work from the University of Nevada–Reno to explore themes of black and brown belonging, spirituality, pride, and vulnerability.</p>
-        <p>Battling the waves of life and relearning to trust the power of her talent, she has established herself as a professional artist as of January 2026. Exploring her craft after years of overcoming financial adversity, military service, career shifts, and stay-at-home motherhood, she brings an invaluable spread of life experience to her practice.</p>
-        <p>For the first time in 20 years, Kiki will showcase her work, selected as one of three unrepresented emerging artists for the 2026 River Arts Festival in Memphis.</p>
+    <div style="padding: 72px 56px; display: flex; flex-direction: column; gap: 22px; background-color: #000000">
+      <p style="font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #FFFFFF">Her story</p><div style="font-size:17px;line-height:1.8;color:#4a463d;display:flex;flex-direction:column;gap:20px;max-width:660px">
+        <p style="color: #E4D8B2">Utilizing acrylics, oils, and patterned paper, she examines themes of black and brown belonging, spirituality, pride, and vulnerability.</p>
+        <p style="color: #E4D8B2">Exploring her craft after years of overcoming financial adversity, military service, career shifts, and stay-at-home motherhood, she brings an invaluable spread of life experience to her practice. Relearning how to trust the power of her talent, she has established herself as a professional artist since January 2026.&nbsp;</p>
+        <p style="color: #E4D8B2">For the first time in 20 years, Kiki will showcase her work, selected as one of three unrepresented emerging artists for the 2026 River Arts Festival in Memphis.</p>
       </div>
     </div>
   </section>
 
-  <section style="padding:104px 48px;display:flex;justify-content:center;border-bottom:1px solid rgba(23,21,15,0.12)">
+  <section style="padding: 104px 48px; display: flex; justify-content: center; border-bottom: 1px solid rgba(23,21,15,0.12); background-color: #000000">
     <div style="max-width:680px;text-align:center">
-      <p style="font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#8a8377;margin-bottom:24px">Artist statement</p>
-      <p style="font-family:'Newsreader',serif;font-size:28px;line-height:1.5;text-wrap:pretty">I create neo-spiritual African diasporic portraiture, combining pattern, fibers, and paint to capture soft moments — leaving the viewer with a sense of the subject's soul in infinite expression.</p>
-      <a href="index.html#shop" style="display:inline-block;margin-top:32px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-bottom:1px solid #17150f;padding-bottom:5px;text-decoration:none">See the collection</a>
+      <p style="font-size: 15px; letter-spacing: 0.22em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 24px; font-weight: 800; font-family: Hanken Grotesk">Artist statement</p>
+      
+      <p style="font-family: 'Newsreader',serif; font-size: 28px; line-height: 1.5; text-wrap: pretty; color: #E4D8B2">"I paint intimate, spiritual black portraits to explore my identity.  This practice empowers me to find my own meaning in the convergence of black presence with belonging, community, and ancestral legacy.  By combining pattern, fibers, and paint, I aim to capture soft  moments, leaving the viewer with a sense of the soul in infinite expresssion.  Witnessing this vulnerability, may you consider how we carry our community and ourselves in our past, present, and future."</p><a href="works.html#shop" style="display:inline-block;margin-top:32px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-bottom:1px solid #17150f;padding-bottom:5px;text-decoration:none">See the collection</a>
     </div>
   </section>
 
-  <section style="background:#e7e3da;border-bottom:1px solid rgba(23,21,15,0.12)">
-    <div style="padding:64px 48px 20px;text-align:center">
-      <p style="font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#8a8377;margin-bottom:14px">In the studio</p>
-      <h2 style="font-family:'Newsreader',serif;font-weight:300;font-size:44px;letter-spacing:-0.02em">A few moments</h2>
+  <section style="border-bottom: 1px solid rgba(23,21,15,0.12); background-color: #000000">
+    <div style="padding: 64px 48px 20px; text-align: center; background-color: #000000; color: #0B0A09">
+      
+      <h2 style="font-family: Hanken Grotesk; font-weight: 300; font-size: 28px; letter-spacing: -0.02em; color: #FFFFFF; text-transform: uppercase">in the studio</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:200px;gap:1px;background:rgba(23,21,15,0.12);margin-top:56px;border-top:1px solid rgba(23,21,15,0.12)">
-      <image-slot id="artist-studio" shape="rect" placeholder="Drop a photo — the studio" style="grid-column:span 3;grid-row:span 2;width:100%;height:100%;background:#f4f1ec"><img src="1WxRInnIYBB0nY-j6x4-4qJvXXmKvzpVI.jpg" alt="In the studio" style="width:100%;height:100%;object-fit:cover;display:block" /></image-slot>
-      <image-slot id="artist-hands" shape="rect" placeholder="Drop a photo — hands at work" style="grid-column:span 3;width:100%;height:100%;background:#f4f1ec"></image-slot>
-      <image-slot id="artist-wip" shape="rect" placeholder="Drop a photo — a work in progress" style="grid-column:span 3;width:100%;height:100%;background:#f4f1ec"></image-slot>
-      <image-slot id="artist-detail" shape="rect" placeholder="Drop a photo — a detail" style="grid-column:span 2;width:100%;height:100%;background:#f4f1ec"></image-slot>
-      <image-slot id="artist-plants" shape="rect" placeholder="Drop a photo" style="grid-column:span 2;width:100%;height:100%;background:#f4f1ec"><img src="1C97zi_NAjSS_v8b4TkcFc84-3YcSHIts.jpg" alt="Portrait of a laughing man, red and pink" style="width:100%;height:100%;object-fit:cover;display:block" /></image-slot>
-      <image-slot id="artist-finished" shape="rect" placeholder="Drop a photo — a finished piece" style="grid-column:span 2;width:100%;height:100%;background:#f4f1ec"></image-slot>
+      <image-slot id="artist-studio" shape="rect" placeholder="Drop a photo — the studio" style="grid-column: span 3; grid-row: span 2; width: 100%; height: 100%; background-color: #FAFAFA"><img src="1WxRInnIYBB0nY-j6x4-4qJvXXmKvzpVI.jpg" alt="In the studio" style="width:100%;height:100%;object-fit:cover;display:block"></image-slot>
+      <image-slot id="artist-hands" shape="rect" placeholder="Drop a photo — hands at work" style="grid-column: span 3; width: 100%; height: 100%; background-color: #FAFAFA"></image-slot>
+      <image-slot id="artist-wip" shape="rect" placeholder="Drop a photo — a work in progress" style="grid-column: span 3; width: 100%; height: 100%; background-color: #FAFAFA"></image-slot><image-slot id="artist-finished" shape="rect" placeholder="Drop a photo — a finished piece" style="grid-column: span 2; width: 100%; height: 100%; background-color: #FAFAFA"></image-slot>
+      <image-slot id="artist-detail" shape="rect" placeholder="Drop a photo — a detail" style="grid-column: span 2; width: 100%; height: 100%; background-color: #FAFAFA"></image-slot>
+      <image-slot id="artist-plants" shape="rect" placeholder="Drop a photo" style="grid-column: span 2; width: 100%; height: 100%; background-color: #FAFAFA"><img src="1C97zi_NAjSS_v8b4TkcFc84-3YcSHIts.jpg" alt="Portrait of a laughing man, red and pink" style="width:100%;height:100%;object-fit:cover;display:block"></image-slot>
+      
     </div>
   </section>
 
-  <section style="padding:104px 48px;text-align:center">
-    <h2 style="font-family:'Newsreader',serif;font-weight:300;font-size:48px;letter-spacing:-0.02em;margin-bottom:16px">See what she's made.</h2>
-    <p style="font-size:16px;line-height:1.65;color:#5e594f;max-width:440px;margin:0 auto 34px">Browse the current collection of originals, or start a conversation about a commission.</p>
+  <section style="padding: 104px 48px; text-align: center; background-color: #5F5133">
+    <h2 style="font-family: 'Newsreader',serif; font-weight: 300; font-size: 48px; letter-spacing: -0.02em; margin-bottom: 16px; color: #FFFFFF">See what she's made.</h2>
+    <p style="font-size: 16px; line-height: 1.65; color: #E4D8B2; max-width: 440px; margin: 0 auto 34px">Browse the current collection of originals, or start a conversation about a commission.</p>
     <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap">
-      <a href="index.html#shop" style="background:#17150f;color:#f4f1ec;text-decoration:none;padding:15px 32px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase">Visit the shop</a>
-      <a href="commissions.html" style="text-decoration:none;padding:15px 6px;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-bottom:1px solid #17150f">Commission a piece</a>
-      <a href="mailto:hello@kikiangkratok.art" style="text-decoration:none;padding:15px 6px;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-bottom:1px solid #17150f">Email the studio</a>
+      <a href="works.html#shop" style="color: #FFFFFF; text-decoration: none; padding: 15px 32px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-width: 1px; border-style: solid; border-color: #E4D8B2">Visit the shop</a>
+      <a href="commissions.html" style="text-decoration: none; padding: 15px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-bottom: 1px solid #17150f; border-color: #E4D8B2; color: #FFFFFF">Commission a piece</a>
+      <a href="mailto:hello@kikiangkratok.art" style="text-decoration: none; padding: 15px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-bottom: 1px solid #17150f; border-color: #E4D8B2; color: #FFFFFF">Email the studio</a>
     </div>
   </section>
 
